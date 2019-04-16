@@ -428,7 +428,8 @@ int main()
 	for(;i < sizeof(gImage_background); i+=2)
 	{
 		color_dat1 = (gImage_background[i]<<8) | gImage_background[i+1];
-		if(color_dat1 != color_dat2)
+		//if(color_dat1 != color_dat2)
+		if((color_dat1 != color_dat2) || (index_count >= 0xfffe))
 		{
 			//printf("i-%d 2-%02x\r\n",i,color_dat2);
 			color_buffer[color_count++] = (index_count&0xff00)>>8 | 0x80;
