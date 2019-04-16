@@ -416,7 +416,7 @@ int main()
 	int j;
 	int flag;
 
-	printf("Ñ¹ËõÇ°Êı¾İ³¤¶È%d\r\n",sizeof(gImage_background));
+	printf("å‹ç¼©å‰æ•°æ®é•¿åº¦%d\r\n",sizeof(gImage_background));
 
 	memset(&color_buffer,0,sizeof(color_buffer));
 	for(i = 0; i < 10; i++)
@@ -431,13 +431,8 @@ int main()
 		if(color_dat1 != color_dat2)
 		{
 			//printf("i-%d 2-%02x\r\n",i,color_dat2);
-			if(index_count <= 0xff)
-				color_buffer[color_count++] = index_count;
-			else
-			{
-				color_buffer[color_count++] = (index_count&0xff00)>>8 | 0x80;
-				color_buffer[color_count++] = index_count&0x00ff;
-			}
+			color_buffer[color_count++] = (index_count&0xff00)>>8 | 0x80;
+			color_buffer[color_count++] = index_count&0x00ff;
 			color_buffer[color_count++] = gImage_background[i];
 			color_buffer[color_count++] = gImage_background[i+1];
 			index_count = 0;
@@ -445,17 +440,15 @@ int main()
 		}
 		index_count++;
 	}
-	if(index_count <= 0xff)
-		color_buffer[color_count++] = index_count;
-	else
-	{
-		color_buffer[color_count++] = (index_count&0xff00)>>8;
-		color_buffer[color_count++] = index_count&0x00ff;
-	}
-	printf("Ñ¹ËõºóÊı¾İ³¤¶È%d\r\n",color_count);
+	//æœ€ååƒç´ æ•°æ®
+	color_buffer[color_count++] = (index_count&0xff00)>>8;
+	color_buffer[color_count++] = index_count&0x00ff;
+	color_buffer[color_count++] = gImage_background[i];
+	color_buffer[color_count++] = gImage_background[i+1];
+	printf("å‹ç¼©åæ•°æ®é•¿åº¦%d\r\n",color_count);
 
 	/*
-	//²é¿´Ñ¹ËõÊı¾İ
+	//æŸ¥çœ‹å‹ç¼©æ•°æ®
 	for(i = 0; i < 8; i++)
 		printf(" %02x",color_buffer[i]);
 	printf("\r\n");
